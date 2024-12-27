@@ -1,26 +1,22 @@
-#define BLYNK_TEMPLATE_ID "TMPL3CptHTfPO"
-#define BLYNK_TEMPLATE_NAME "Water Pump"
+#define BLYNK_TEMPLATE_ID "TMPL3sPb-Yw7P"
+#define BLYNK_TEMPLATE_NAME "IOT Peltier"
+#define BLYNK_AUTH_TOKEN "em2KsbWOehv0sAZReH29ATjsyRVP65fj"
 
 #define BLYNK_SERIAL Serial
 #include<ESP8266WiFi.h>
 #include<BlynkSimpleEsp8266.h>
-// Replace with your network credentials  
+
 char ssid[] = "iPhone";
 char password[] = "hanu54321";
 
-// Blynk authentication token (Copy this from the Blynk app)
-char auth[] = "4t0NqCYQ3FP8pFjQqDQ6zOlqZlnPqD6i";
-
-// Pin connected to relay
-const int relayPin = D1;  // Use GPIO pin D1 (can change depending on your board)
-
+const int relayPin = D1; 
 BLYNK_WRITE(V1) {  // Virtual Pin 1 controls the relay
   int pinValue = param.asInt();  // Get the state of the button (1 or 0)
   
   if(pinValue == 1) {
-    digitalWrite(relayPin, HIGH);  // Turn on the relay (water pump)
+    digitalWrite(relayPin, HIGH);  // Turn on the relay
   } else {
-    digitalWrite(relayPin, LOW);   // Turn off the relay (water pump)
+    digitalWrite(relayPin, LOW);   // Turn off the relay
   }
 }
 
@@ -41,7 +37,7 @@ void setup() {
   Serial.println("Connected to WiFi");
 
   // Connect to Blynk
-  Blynk.begin(auth, WiFi.SSID().c_str(), WiFi.psk().c_str());
+  Blynk.begin(BLYNK_AUTH_TOKEN, WiFi.SSID().c_str(), WiFi.psk().c_str());
 }
 
 void loop() {
